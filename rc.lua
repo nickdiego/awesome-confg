@@ -58,6 +58,7 @@ local webbrowser = "chromium"
 local lockscreen = "/usr/lib/kscreenlocker_greet"
 local filemanager = "ranger"
 local filemanager_cmd = terminal .." -e " .. filemanager
+local filemanager_gui = "nemo"
 local toggledisplay = "~/.bin/toggle-aux-display"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -161,6 +162,7 @@ globalkeys = awful.util.table.join(
         end),
     awful.key({ modkey,           }, "w", function () awful.util.spawn(webbrowser) end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn(filemanager_cmd, { floating = true }) end),
+    awful.key({ modkey, "Shift"   }, "e", function () awful.util.spawn(filemanager_gui, { floating = true }) end),
     awful.key({ modkey, "Control" }, "l", function () awful.util.spawn(lockscreen) end),
 
     -- Layout manipulation
@@ -191,6 +193,10 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end),
+    awful.key({ modkey, "Shift"   }, "Return", function ()
+            awful.spawn(terminal, { floating = true, placement = awful.placement.centered })
+        end),
+
     awful.key({ modkey,           }, "Home", function()
             awful.spawn.with_shell(toggledisplay)
             awesome.restart()
@@ -271,6 +277,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
+    awful.key({ modkey, "Shift"   }, "y",      awful.placement.centered),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",
         function (c)
@@ -362,9 +369,13 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
      },
      callback = function(c)
+         if not c.placement then
+             c.placement = awful.placement.no_overlap +
+                awful.placement.no_offscreen
+         end
+
          awful.client.setslave(c)
          if not c.class and not c.name then
              local f
@@ -393,17 +404,31 @@ awful.rules.rules = {
             "pinentry",
             "veromix",
             "xtightvncviewer",
-            "nemo"
+            "Nemo"
             },
 
           name = {
             "Event Tester",  -- xev.
+            "Unlock Keyring", -- gnome-keyring
           },
           role = {
             "AlarmWindow",  -- Thunderbird's calendar.
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
           }
-      }, properties = { floating = true }
+      },
+      properties = { floating = true, placement = awful.placement.centered }
+    },
+
+    { rule_any = {
+          class = {
+            "Nemo"
+            },
+        },
+      properties = {
+        floating = true,
+        width = 800,
+        height = 540,
+        placement = awful.placement.centered }
     },
 
     -- Set Brower/Mail Client to always map on tags number 2 of screen 1.
