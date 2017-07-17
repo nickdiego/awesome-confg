@@ -4,7 +4,7 @@ local awful = require("awful")
 -- Keyboard map indicator and changer
 local kbdcfg = {}
 kbdcfg.cmd = "setxkbmap"
-kbdcfg.layout = { { "br", "abnt2" , "Pt-br" }, { "us", "intl" , "Us" } }
+kbdcfg.layout = { { "br", "abnt2" , "br" }, { "us", "intl" , "us" } }
 kbdcfg.update = function ()
   local fh = assert(io.popen("setxkbmap -print", "r"))
   local text = fh:read("*all")

@@ -120,6 +120,7 @@ theme.widget_ac                                 = theme.dir .. "/icons/ac.png"
 theme.widget_battery                            = theme.dir .. "/icons/battery.png"
 theme.widget_battery_low                        = theme.dir .. "/icons/battery_low.png"
 theme.widget_battery_empty                      = theme.dir .. "/icons/battery_empty.png"
+theme.widget_keyboard                           = theme.dir .. "/icons/keyboard.png"
 theme.widget_mem                                = theme.dir .. "/icons/mem.png"
 theme.widget_cpu                                = theme.dir .. "/icons/cpu.png"
 theme.widget_temp                               = theme.dir .. "/icons/temp.png"
@@ -166,6 +167,8 @@ local spr     = wibox.widget.textbox(' ')
 local arrl_dl = separators.arrow_left(theme.bg_focus, "alpha")
 local arrl_ld = separators.arrow_left("alpha", theme.bg_focus)
 local arrl_ll = separators.arrow_left("alpha", "alpha")
+
+local kbdicon = wibox.widget.imagebox(theme.widget_keyboard)
 
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
@@ -325,6 +328,7 @@ function theme.at_screen_connect(s)
             wibox.container.background(baticon, theme.bg_normal),
             wibox.container.background(bat.widget, theme.bg_normal),
             arrl_ld,
+            wibox.container.background(kbdicon, theme.bg_focus),
             wibox.container.background(kbdcfg.widget, theme.bg_focus),
             arrl_dl,
             wibox.container.background(s.mytextclock, theme.bg_normal),
