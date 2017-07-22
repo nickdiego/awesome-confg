@@ -150,16 +150,6 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-    awful.key({ modkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
     awful.key({ modkey,           }, "w", function () awful.util.spawn(webbrowser) end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn(filemanager_cmd, { floating = true, placement = awful.placement.centered }) end),
     awful.key({ modkey, "Shift"   }, "e", function () awful.util.spawn(filemanager_gui, { floating = true }) end),
@@ -170,15 +160,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
     awful.key({ modkey,           }, "Right", function () awful.screen.focus_relative(1) end),
     awful.key({ modkey,           }, "Left", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "k", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey,           }, "j", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+    awful.key({ modkey,           }, "h", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey,           }, "l", function () awful.screen.focus_relative(-1) end),
 
     -- Non-empty tag browsing
-    awful.key({ modkey,           }, "Down", function () lain.util.tag_view_nonempty(-1) end,
-              {description = "view  previous nonempty", group = "tag"}),
-    awful.key({ modkey,           }, "Up", function () lain.util.tag_view_nonempty(1) end,
-              {description = "view  previous nonempty", group = "tag"}),
+    awful.key({ modkey,           }, "j", function () lain.util.tag_view_nonempty(-1) end),
+    awful.key({ modkey,           }, "k", function () lain.util.tag_view_nonempty(1) end),
+    awful.key({ modkey,           }, "Up", function () lain.util.tag_view_nonempty(-1) end),
+    awful.key({ modkey,           }, "Down", function () lain.util.tag_view_nonempty(1) end),
     -- Tag browsing
     --awful.key({ modkey,           }, "Up",   awful.tag.viewprev       ),
     --awful.key({ modkey,           }, "Down",  awful.tag.viewnext       ),
