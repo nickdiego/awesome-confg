@@ -134,7 +134,7 @@ theme.widget_vol_no                             = theme.dir .. "/icons/vol_no.pn
 theme.widget_vol_mute                           = theme.dir .. "/icons/vol_mute.png"
 theme.widget_mail                               = theme.dir .. "/icons/mail.png"
 theme.widget_mail_on                            = theme.dir .. "/icons/mail_on.png"
-theme.tasklist_disable_icon                     = true
+theme.tasklist_disable_icon                     = false
 theme.useless_gap                               = 0
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
@@ -157,7 +157,7 @@ theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+theme.icon_theme = "breeze-dark"
 
 local markup = lain.util.markup
 local separators = lain.util.separators
@@ -212,6 +212,15 @@ theme.volume = lain.widget.alsa({
     end
 })
 
+-- Create a textclock and calendar widget
+local textclock = wibox.widget.textclock(markup.font(theme.font, " %a %b %d, %H:%M"))
+local calendarwidget = lain.widget.calendar {
+    attach_to = { textclock },
+    followtag = true,
+    notification_preset = {
+        font = theme.font
+    }
+}
 
 function theme.at_screen_connect(s)
 
@@ -283,9 +292,6 @@ function theme.at_screen_connect(s)
             selected = i==1})
     end
 
-    -- Create a textclock widget
-    s.mytextclock = wibox.widget.textclock()
-
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
@@ -331,7 +337,7 @@ function theme.at_screen_connect(s)
             wibox.container.background(kbdicon, theme.bg_focus),
             wibox.container.background(kbdcfg.widget, theme.bg_focus),
             arrl_dl,
-            wibox.container.background(s.mytextclock, theme.bg_normal),
+            wibox.container.background(textclock, theme.bg_normal),
             arrl_ld,
             wibox.container.background(s.mylayoutbox, theme.bg_focus),
         }
