@@ -8,6 +8,7 @@ local gears  = require("gears")
 local lain   = require("lain")
 local awful  = require("awful")
 local wibox  = require("/wibox")
+local helpers = require("lain.helpers")
 
 local theme = {}
 
@@ -134,6 +135,7 @@ theme.widget_vol_no                             = theme.dir .. "/icons/vol_no.pn
 theme.widget_vol_mute                           = theme.dir .. "/icons/vol_mute.png"
 theme.widget_mail                               = theme.dir .. "/icons/mail.png"
 theme.widget_mail_on                            = theme.dir .. "/icons/mail_on.png"
+theme.widget_task                               = theme.dir .. "/icons/task.png"
 theme.tasklist_disable_icon                     = false
 theme.useless_gap                               = 0
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
@@ -233,6 +235,17 @@ theme.kbdwidget = lain.widget.contrib.kbdlayout({
     end
 })
 
+-- Taskwarrior
+local taskicon = wibox.widget.imagebox(theme.widget_task)
+taskicon:buttons(awful.util.table.join(awful.button({}, 1, lain.widget.contrib.task.prompt)))
+lain.widget.contrib.task.attach(taskicon, {
+    -- do not colorize output
+    show_cmd = "task | sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g'",
+    followtag = true,
+    notification_preset = {
+        font = theme.font,
+    }
+})
 
 function theme.at_screen_connect(s)
 
@@ -346,7 +359,8 @@ function theme.at_screen_connect(s)
             wibox.container.background(volicon, theme.bg_normal),
             wibox.container.background(theme.volume.widget, theme.bg_normal),
             arrl_ld,
-            wibox.container.background(textclock, theme.bg_focus),
+            wibox.container.background(wibox.container.margin(taskicon, 2, 2), theme.bg_focus),
+            wibox.container.background(wibox.container.margin(textclock, 2, 3), theme.bg_focus),
             wibox.container.background(spr, theme.bg_focus),
             arrl_dl,
             wibox.container.background(s.mylayoutbox, theme.bg_normal),
