@@ -213,7 +213,7 @@ theme.volume = lain.widget.alsa({
 })
 
 -- Create a textclock and calendar widget
-local textclock = wibox.widget.textclock(markup.font(theme.font, " %a %b %d, %H:%M"))
+local textclock = wibox.widget.textclock(markup.font(theme.font, "%a %b %d, %H:%M"))
 local calendarwidget = lain.widget.calendar {
     attach_to = { textclock },
     followtag = true,
@@ -221,6 +221,18 @@ local calendarwidget = lain.widget.calendar {
         font = theme.font
     }
 }
+
+theme.kbdwidget = lain.widget.contrib.kbdlayout({
+    layouts = {
+        { layout = "br", variant = "abnt2" },
+        { layout = "us", variant = "intl" },
+    },
+    add_us_secondary = false,
+    settings = function()
+        widget:set_markup(markup.font(theme.font, kbdlayout_now.layout .. " "))
+    end
+})
+
 
 function theme.at_screen_connect(s)
 
@@ -311,8 +323,6 @@ function theme.at_screen_connect(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
-    local kbdcfg = require("utils/kbdcfg")
-
     s.systray = wibox.widget.systray()
 
     -- Add widgets to the wibox
@@ -335,7 +345,7 @@ function theme.at_screen_connect(s)
             wibox.container.background(bat.widget, theme.bg_normal),
             arrl_ld,
             wibox.container.background(kbdicon, theme.bg_focus),
-            wibox.container.background(kbdcfg.widget, theme.bg_focus),
+            wibox.container.background(theme.kbdwidget.widget, theme.bg_focus),
             arrl_dl,
             wibox.container.background(textclock, theme.bg_normal),
             arrl_ld,

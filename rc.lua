@@ -17,7 +17,6 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 -- Custom util modules
-local kbdcfg = require("utils/kbdcfg")
 local cyclefocus = require("utils/cyclefocus")
 cyclefocus.display_notifications = false
 
@@ -203,7 +202,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1) end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
-    awful.key({ modkey, "Control" }, "k", kbdcfg.switch),
+    awful.key({ modkey, "Control" }, "k", beautiful.kbdwidget.next),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
