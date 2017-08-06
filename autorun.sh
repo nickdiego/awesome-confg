@@ -8,8 +8,8 @@ function run() {
 }
 
 # Start apps
-run compton
 run nm-applet
-run udiskie --tray --use-udisks2
-run dropbox
+run compton
+run udiskie --use-udisks2
 run chromium --no-startup-window
+run dropbox
