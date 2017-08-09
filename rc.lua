@@ -182,7 +182,7 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end),
     awful.key({ modkey, "Shift"   }, "Return", function ()
-            awful.spawn(terminal, { floating = true, placement = awful.placement.centered })
+            awful.spawn(terminal, {}, lain.util.magnify_client)
         end),
 
     awful.key({ modkey,           }, "Home", function()
