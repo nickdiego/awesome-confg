@@ -60,6 +60,15 @@ local filemanager_cmd = terminal .." -e " .. filemanager
 local filemanager_gui = "nemo"
 local toggledisplay = "~/.bin/toggle-aux-display"
 
+-- This function gets the first NOT primary screen
+-- TODO: Add the ability to select the exact secondary screen
+local function alternative_screen()
+  for s in screen do
+    if s ~= screen.primary then return s end
+  end
+  return screen.primary
+end
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.util.terminal = terminal
 awful.util.tagnames = { "code", "term", "web", "chat", "etc" }
@@ -425,16 +434,16 @@ awful.rules.rules = {
       properties = { screen = (screen.count() < 3 and 1 or 3), tag = "web", maximized = false}
     },
     { rule_any = { class = { "Evolution" } },
-      properties = { screen = 1, tag = "web", maximized_vertical = true, maximized_horizontal = true }
+      properties = { screen = screen.primary, tag = "web", maximized_vertical = true, maximized_horizontal = true }
     },
     { rule_any = { class = {"Slack", "Telegram"} },
-      properties = { screen = 1, tag = "chat", floating = true }
+      properties = { screen = screen.primary, tag = "chat", floating = true }
     },
     { rule = { name = "Spotify" },
-      properties = { screen = 1, tag = "etc", maximized_vertical = true, maximized_horizontal = true }
+      properties = { screen = screeb,primary, tag = "etc", maximized_vertical = true, maximized_horizontal = true }
     },
     { rule = { name = "DFB X11 system window" },
-      properties = { screen = 1 }
+      properties = { screen = screen.primary }
     },
     { rule = { class = "Gimp" },
       properties = { tag = "etc" }
