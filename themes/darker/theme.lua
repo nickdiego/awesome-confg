@@ -13,6 +13,7 @@ local helpers = require("lain.helpers")
 local theme = {}
 
 theme.dir           = os.getenv("HOME") .. "/.config/awesome/themes/darker"
+theme.font          = "Monaco 8"
 theme.font          = "xos4 Terminus 9"
 
 theme.bg_normal     = "#000000"
@@ -341,7 +342,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", height = 20, screen = s })
 
     s.systray = wibox.widget.systray()
 
