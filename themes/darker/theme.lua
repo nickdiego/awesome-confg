@@ -315,15 +315,35 @@ function theme.at_screen_connect(s)
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 
+    local quake_cmd = string.format("env SHOW_ARCHINFO=1 termite --config=%s",
+        os.getenv("HOME") .. "/.config/termite/config2")
+
     s.quake = lain.util.quake({
-            app = "env SHOW_ARCHINFO=1 termite --config=config2",
+            app = quake_cmd,
             argname = "--name %s",
             followtag = true,
             width = 0.7,
             height = 0.5,
             overlap = true,
             horiz = "center",
-            vert = "top"
+            vert = "top",
+            settings = function(c) c.border_width = 0 end
+        })
+
+    local quake_htop_cmd = string.format("termite --config=%s -e htop",
+        os.getenv("HOME") .. "/.config/termite/config2")
+
+    s.quake_htop = lain.util.quake({
+            app = quake_htop_cmd,
+            name = "quake_htop",
+            argname = "--name %s",
+            followtag = true,
+            width = 0.7,
+            height = 0.5,
+            overlap = true,
+            horiz = "center",
+            vert = "bottom",
+            settings = function(c) c.border_width = 0 end
         })
 
     -- Each screen has its own tag table.

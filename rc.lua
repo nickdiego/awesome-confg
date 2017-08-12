@@ -189,7 +189,9 @@ globalkeys = awful.util.table.join(
             awful.spawn(terminal, {}, lain.util.magnify_client)
         end),
     awful.key({ modkey,           }, "BackSpace", function () awful.screen.focused().quake:toggle() end,
-              {description = "toggle quake app (termite)"}),
+              {description = "toggle quake termite"}),
+    awful.key({ modkey, "Shift"   }, "BackSpace", function () awful.screen.focused().quake_htop:toggle() end,
+              {description = "toggle quake htop"}),
 
     awful.key({ modkey,           }, "Home", function()
             awful.spawn.with_shell(toggledisplay)
