@@ -342,7 +342,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", height = 20, screen = s })
+    s.mywibox = awful.wibar({ position = "top", height = 18, screen = s })
 
     s.systray = wibox.widget.systray()
 
