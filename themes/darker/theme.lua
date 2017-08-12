@@ -324,7 +324,7 @@ function theme.at_screen_connect(s)
             followtag = true,
             width = 0.7,
             height = 0.5,
-            overlap = true,
+            overlap = false,
             horiz = "center",
             vert = "top",
             settings = function(c) c.border_width = 0 end
@@ -339,7 +339,7 @@ function theme.at_screen_connect(s)
             argname = "--name %s",
             followtag = true,
             width = 0.7,
-            height = 0.5,
+            height = 0.4,
             overlap = true,
             horiz = "center",
             vert = "bottom",
