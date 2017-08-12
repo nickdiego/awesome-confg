@@ -316,7 +316,7 @@ function theme.at_screen_connect(s)
     end
 
     s.quake = lain.util.quake({
-            app = "termite --config=config2",
+            app = "env SHOW_ARCHINFO=1 termite --config=config2",
             argname = "--name %s",
             followtag = true,
             width = 0.7,
