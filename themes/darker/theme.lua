@@ -315,6 +315,17 @@ function theme.at_screen_connect(s)
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 
+    s.quake = lain.util.quake({
+            app = "termite --config=/home/nick/.config/termite/config2",
+            argname = "--name %s",
+            followtag = true,
+            width = 0.7,
+            height = 0.5,
+            overlap = true,
+            horiz = "center",
+            vert = "top"
+        })
+
     -- Each screen has its own tag table.
     local tags = awful.util.tagnames
     local layouts = awful.layout.layouts
