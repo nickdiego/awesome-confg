@@ -316,7 +316,7 @@ function theme.at_screen_connect(s)
     end
 
     s.quake = lain.util.quake({
-            app = "termite --config=/home/nick/.config/termite/config2",
+            app = "termite --config=config2",
             argname = "--name %s",
             followtag = true,
             width = 0.7,
