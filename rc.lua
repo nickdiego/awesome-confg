@@ -20,6 +20,10 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local cyclefocus = require("utils/cyclefocus")
 cyclefocus.display_notifications = false
 
+local collision = require("collision")()
+collision.settings.swap_across_screen = true
+
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -157,16 +161,16 @@ globalkeys = awful.util.table.join(
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey,           }, "Right", function () awful.screen.focus_relative(1) end),
-    awful.key({ modkey,           }, "Left", function () awful.screen.focus_relative(-1) end),
+    --awful.key({ modkey,           }, "Right", function () awful.screen.focus_relative(1) end),
+    --awful.key({ modkey,           }, "Left", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "h", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey,           }, "l", function () awful.screen.focus_relative(-1) end),
 
     -- Non-empty tag browsing
     awful.key({ modkey,           }, "j", function () lain.util.tag_view_nonempty(-1) end),
     awful.key({ modkey,           }, "k", function () lain.util.tag_view_nonempty(1) end),
-    awful.key({ modkey,           }, "Up", function () lain.util.tag_view_nonempty(-1) end),
-    awful.key({ modkey,           }, "Down", function () lain.util.tag_view_nonempty(1) end),
+    --awful.key({ modkey,           }, "Up", function () lain.util.tag_view_nonempty(-1) end),
+    --awful.key({ modkey,           }, "Down", function () lain.util.tag_view_nonempty(1) end),
     -- Tag browsing
     --awful.key({ modkey,           }, "Up",   awful.tag.viewprev       ),
     --awful.key({ modkey,           }, "Down",  awful.tag.viewnext       ),
