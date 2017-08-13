@@ -66,9 +66,9 @@ awful.util.terminal = terminal
 awful.util.tagnames = { "code", "term", "web", "chat", "etc" }
 awful.layout.layouts =
 {
-    awful.layout.suit.tile.bottom,
     awful.layout.suit.tile,
     awful.layout.suit.fair,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.floating,
     awful.layout.suit.max,
     --[[ unused for now
@@ -346,6 +346,13 @@ clientbuttons = awful.util.table.join(
 root.keys(globalkeys)
 -- }}}
 
+local function nlog(str)
+    naughty.notify({
+        preset = naughty.config.presets.critical,
+        text = str
+    })
+end
+
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -522,6 +529,15 @@ client.connect_signal("unfocus", function(c)
         c.border_color = beautiful.border_normal
         c.opacity = 0.9
     end)
+
+client.connect_signal("request::activate", function(c, context, hints)
+    if c and not c:isvisible() then
+        nlog("raising " .. c.class)
+        c.urgent = false
+        awful.tag.viewmore(c:tags(), c.screen)
+    end
+end)
+
 -- }}}
 
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
