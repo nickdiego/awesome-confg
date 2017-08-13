@@ -66,14 +66,14 @@ awful.util.terminal = terminal
 awful.util.tagnames = { "code", "term", "web", "chat", "etc" }
 awful.layout.layouts =
 {
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.tile,
+    awful.layout.suit.fair,
     awful.layout.suit.floating,
     awful.layout.suit.max,
-    awful.layout.suit.tile.bottom,
     --[[ unused for now
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
@@ -82,16 +82,6 @@ awful.layout.layouts =
     ]]--
 }
 -- }}}
-
-lain.layout.termfair.nmaster           = 3
-lain.layout.termfair.ncol              = 1
-lain.layout.termfair.center.nmaster    = 3
-lain.layout.termfair.center.ncol       = 1
-lain.layout.cascade.tile.offset_x      = 2
-lain.layout.cascade.tile.offset_y      = 32
-lain.layout.cascade.tile.extra_padding = 5
-lain.layout.cascade.tile.nmaster       = 5
-lain.layout.cascade.tile.ncol          = 2
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
