@@ -2,19 +2,16 @@
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
 
-local gears = require("gears")
-local awful = require("awful")
-              require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
--- Theme handling library
-local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
--- Awesome complements
-local lain          = require("lain")
-local menubar = require("menubar")
+local gears         = require("gears")
+local awful         = require("awful")
+local wibox         = require("wibox")     -- Widget and layout library
+local beautiful     = require("beautiful") -- Theme handling library
+local naughty       = require("naughty")   -- Notification library
+local lain          = require("lain")      -- Awesome complements
+local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+
+require("awful.autofocus")
 
 -- Custom util modules
 local cyclefocus = require("utils/cyclefocus")
@@ -214,7 +211,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1) end),
 
-    awful.key({ modkey, "Control" }, "n", awful.client.restore),
+    awful.key({ modkey, "Shift" }, "n", awful.client.restore),
     awful.key({ modkey, "Control" }, "k", beautiful.kbdwidget.next),
 
     -- Prompt
@@ -416,6 +413,10 @@ awful.rules.rules = {
           role = {
             "AlarmWindow",  -- Thunderbird's calendar.
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+          },
+          type = {
+            "splash",
+            "pop-up"
           }
       },
       properties = { floating = true, placement = awful.placement.centered }
@@ -434,17 +435,17 @@ awful.rules.rules = {
     },
 
     -- Set Brower/Mail Client to always map on tags number 2 of screen 1.
-    { rule_any = { class = {"Firefox", "Chromium", "Chrome" } },
-      properties = { screen = (screen.count() < 3 and 1 or 3), tag = "web", maximized = false}
+    { rule_any = { class = {"Firefox", "Chromium", "Google-chrome" } },
+      properties = { screen = (screen.count() < 3 and 1 or 3), tag = "web", switchtotag = true}
     },
     { rule_any = { class = { "Evolution" } },
-      properties = { screen = 1, tag = "web", maximized_vertical = true, maximized_horizontal = true }
+      properties = { screen = 1, tag = "web", maximized_vertical = true, maximized_horizontal = true, switchtotag = true}
     },
-    { rule_any = { class = {"Slack", "Telegram"} },
-      properties = { screen = 1, tag = "chat", floating = true }
+    { rule_any = { class = {"Slack", "Telegram", "discord"} },
+      properties = { screen = 1, tag = "chat", floating = true, switchtotag = true }
     },
     { rule = { name = "Spotify" },
-      properties = { screen = 1, tag = "etc", maximized_vertical = true, maximized_horizontal = true }
+      properties = { screen = 1, tag = "etc", maximized_vertical = true, maximized_horizontal = true, switchtotag = true }
     },
     { rule = { name = "DFB X11 system window" },
       properties = { screen = 1 }
