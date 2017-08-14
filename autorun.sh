@@ -8,9 +8,9 @@ function run() {
 }
 
 # Start apps
-run nm-applet
 run compton
-run unclutter -idle 2
+run nm-applet
 run udiskie --use-udisks2
 run google-chrome-stable --no-startup-window
 run dropbox
+run unclutter -idle 2

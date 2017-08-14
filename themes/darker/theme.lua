@@ -21,6 +21,8 @@ theme.bg_focus      = "#1E2320"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
+theme.systray_icon_spacing = 1
+theme.wibar_height  = 18
 
 theme.fg_normal     = "#bbbbbb"
 theme.fg_focus      = "#ffffff"
@@ -373,9 +375,11 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", height = 18, screen = s })
+    s.mywibox = awful.wibar({ position = "top", height = theme.wibar_height, screen = s })
 
     s.systray = wibox.widget.systray()
+
+
 
     -- Add widgets to the wibox
     s.mywibox:setup {
