@@ -162,10 +162,11 @@ theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/
 
 theme.collision_focus_fg = theme.fg_normal
 theme.collision_focus_bg = theme.bg_normal
-theme.collision_focus_bg_center = theme.fg_normal
-theme.collision_shape_width = 40
-theme.collision_shape_height = 40
+theme.collision_focus_bg_center = theme.bg_normal
+theme.collision_shape_width = 30
+theme.collision_shape_height = 30
 theme.collision_focus_padding = 4
+theme.collision_focus_border_width = 4
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
