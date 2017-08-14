@@ -342,7 +342,22 @@ function theme.at_screen_connect(s)
             argname = "--name %s",
             followtag = true,
             width = 0.7,
-            height = 0.4,
+            height = 0.5,
+            overlap = true,
+            horiz = "center",
+            vert = "bottom",
+            settings = function(c) c.border_width = 0 end
+        })
+
+    local quake_nemo_cmd = "nemo"
+
+    s.quake_nemo = lain.util.quake({
+            app = quake_nemo_cmd,
+            name = "quake_nemo",
+            argname = "--name %s",
+            followtag = true,
+            width = 0.5,
+            height = 0.5,
             overlap = true,
             horiz = "center",
             vert = "bottom",
