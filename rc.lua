@@ -303,7 +303,7 @@ for i = 1, 5 do
                         local screen = mouse.screen
                         local tag = awful.tag.gettags(screen)[i]
                         if tag then
-                           awful.tag.viewonly(tag)
+                           tag:view_only()
                         end
                   end),
         -- Toggle tag.
@@ -532,8 +532,6 @@ client.connect_signal("unfocus", function(c)
 
 client.connect_signal("request::activate", function(c, context, hints)
     if c and not c:isvisible() then
-        nlog("raising " .. c.class)
-        c.urgent = false
         awful.tag.viewmore(c:tags(), c.screen)
     end
 end)
