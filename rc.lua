@@ -534,7 +534,9 @@ client.connect_signal("unfocus", function(c)
 
 client.connect_signal("request::activate", function(c, context, hints)
     if c and not c:isvisible() then
-        awful.tag.viewmore(c:tags(), c.screen)
+        c.first_tag:view_only()
+        c.minimized = false
+        client.focus = c
     end
 end)
 
