@@ -343,10 +343,14 @@ root.keys(globalkeys)
 -- }}}
 
 local function nlog(str)
-    naughty.notify({
-        preset = naughty.config.presets.critical,
-        text = str
-    })
+    if use_notif_for_log then
+        naughty.notify({
+            preset = naughty.config.presets.critical,
+            text = str
+        })
+    else
+        gears.debug.print_warning(str)
+    end
 end
 
 -- {{{ Rules
