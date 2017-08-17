@@ -438,7 +438,7 @@ awful.rules.rules = {
     { rule_any = { class = { "Evolution" } },
       properties = { screen = 1, tag = "web", maximized_vertical = true, maximized_horizontal = true, switchtotag = true}
     },
-    { rule_any = { class = {"Slack", "Telegram", "discord"} },
+    { rule_any = { class = {"Slack", "Telegram", "discord", "Messenger for Desktop"} },
       properties = { screen = 1, tag = "chat", floating = true, switchtotag = true }
     },
     { rule = { name = "Spotify" },
@@ -532,7 +532,8 @@ client.connect_signal("unfocus", function(c)
 
 client.connect_signal("request::activate", function(c, context, hints)
     if c and not c:isvisible() then
-        if c.class == 'Telegram'or c.class == 'discord' or c.class == 'Slack' then
+        if c.class == 'TelegramDesktop'or c.class == 'discord' or
+            c.class == 'Slack' or c.class == 'Messenger for Desktop' then
             c.first_tag:view_only()
             c.minimized = false
             client.focus = c
