@@ -230,6 +230,7 @@ local textclock = wibox.widget.textclock(markup.font(theme.font, "%a %b %d, %H:%
 local calendarwidget = lain.widget.calendar {
     attach_to = { textclock },
     followtag = true,
+    cal = '/usr/bin/cal -w',
     notification_preset = {
         font = theme.font
     }
