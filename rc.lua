@@ -146,8 +146,7 @@ globalkeys = awful.util.table.join(
             end
             awful.client.run_or_raise(webbrowser, matcher)
         end),
-    awful.key({ modkey,           }, "e", function () awful.util.spawn(filemanager_cmd, { floating = true, placement = awful.placement.centered }) end),
-    awful.key({ modkey, "Shift"   }, "e", function () awful.util.spawn(filemanager_gui, { floating = true }) end),
+    awful.key({ modkey,           }, "e", function () awful.util.spawn(filemanager_gui, { width = 800, height = 540 }) end),
     awful.key({ modkey, "Control" }, "l", function () awful.util.spawn(lockscreen) end),
 
     -- Layout manipulation
@@ -184,8 +183,8 @@ globalkeys = awful.util.table.join(
               {description = "toggle quake termite"}),
     awful.key({ modkey, "Shift"   }, "BackSpace", function () awful.screen.focused().quake_htop:toggle() end,
               {description = "toggle quake htop"}),
-    awful.key({ modkey            }, "=", function () awful.screen.focused().quake_nemo:toggle() end,
-              {description = "toggle quake nemo"}),
+    awful.key({ modkey            }, "=", function () awful.screen.focused().quake_ranger:toggle() end,
+              {description = "toggle quake ranger"}),
 
     awful.key({ modkey,           }, "Home", function()
             awful.spawn.with_shell(toggledisplay)
@@ -426,8 +425,6 @@ awful.rules.rules = {
         },
       properties = {
         floating = true,
-        width = 800,
-        height = 540,
         placement = awful.placement.centered }
     },
 

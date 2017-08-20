@@ -352,10 +352,11 @@ function theme.at_screen_connect(s)
             settings = function(c) c.border_width = 0 end
         })
 
-    local quake_nemo_cmd = "nemo"
+    local quake_ranger_cmd = string.format("termite --config=%s -e ranger",
+        os.getenv("HOME") .. "/.config/termite/config2")
 
-    s.quake_nemo = lain.util.quake({
-            app = quake_nemo_cmd,
+    s.quake_ranger = lain.util.quake({
+            app = quake_ranger_cmd,
             name = "quake_nemo",
             argname = "--name %s",
             followtag = true,
