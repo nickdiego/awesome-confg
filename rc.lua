@@ -364,13 +364,10 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
+                     placement = awful.placement.no_overlap +
+                                 awful.placement.no_offscreen
      },
      callback = function(c)
-         if not c.placement then
-             c.placement = awful.placement.no_overlap +
-                awful.placement.no_offscreen
-         end
-
          awful.client.setslave(c)
          if not c.class and not c.name then
              local f
@@ -392,7 +389,6 @@ awful.rules.rules = {
           },
           class = {
             "MPlayer",
-            "gimp",
             "MessageWin",  -- kalarm.
             "Sxiv",
             "Wpa_gui",
@@ -401,21 +397,29 @@ awful.rules.rules = {
             "xtightvncviewer",
             "Nemo"
             },
-
           name = {
             "Event Tester",  -- xev.
-            "Unlock Keyring", -- gnome-keyring
           },
+      },
+      properties = { floating = true }
+    },
+
+    { rule_any = {
           role = {
             "AlarmWindow",  -- Thunderbird's calendar.
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
           },
+          instance = {
+            "gcr-prompter"  -- Gnome-keyring (Evolution, etc)
+          },
           type = {
-            "splash",
-            "pop-up"
+            "splash",       -- Gimp, Discord, etc..
+            "dialog",       -- Java programs (Android Studio, JD-Gui, etc)
+            "pop-up",       -- example (??)
           }
       },
-      properties = { floating = true, placement = awful.placement.centered }
+      properties = { floating = true },
+      callback = function(c) awful.placement.centered(c) end
     },
 
     { rule_any = {
@@ -442,7 +446,7 @@ awful.rules.rules = {
       end
     },
     { rule_any = { class = { "Evolution" } },
-      properties = { screen = 1, tag = "web", maximized_vertical = true, maximized_horizontal = true, switchtotag = true}
+      properties = { screen = 1, maximized_vertical = true, maximized_horizontal = true }
     },
     { rule_any = {
             class = { "Slack", "Telegram", "discord", "Messenger for Desktop" },
@@ -453,11 +457,11 @@ awful.rules.rules = {
     { rule = { name = "Spotify" },
       properties = { screen = 1, tag = "etc", maximized_vertical = true, maximized_horizontal = true, switchtotag = true }
     },
+    { rule = { class = "Gimp" },
+      properties = { tag = "etc", switchtotag = true, maximized_vertical = true, maximized_horizontal = true }
+    },
     { rule = { name = "DFB X11 system window" },
       properties = { screen = 1 }
-    },
-    { rule = { class = "Gimp" },
-      properties = { tag = "etc" }
     },
     { rule = { name = "Drunkwaiter" },
       properties = { screen = (screen.count() < 3 and 1 or 3) }
