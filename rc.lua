@@ -433,17 +433,8 @@ awful.rules.rules = {
     },
 
     -- Set Brower/Mail Client to always map on tags number 2 of screen 1.
-    { rule_any = { class = {"Firefox", "Chromium", "Google-chrome" } },
-      callback = function(c)
-          -- This make the rule apply only to "browser" windows. Other chrome/chromium instances
-          -- (e.g pages opened with --app=<url> options are not affected by this rule
-          if c.class == "Google-chrome" or c.class == "Chromium" and c.role ~= "browser" then
-              return
-          end
-          c.screen = screen.count() < 3 and 1 or 3
-          c.tag = "web"
-          c.first_tag:view_only()
-      end
+    { rule_any = { class = { "Firefox" }, instance = { "chromium", "google-chrome" } },
+      properties = { screen = screen.count() < 3 and 1 or 3, tag = "web", switchtotag = true }
     },
     { rule_any = { class = { "Evolution" } },
       properties = { screen = 1, maximized_vertical = true, maximized_horizontal = true }
