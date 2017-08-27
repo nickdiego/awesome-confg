@@ -451,6 +451,9 @@ awful.rules.rules = {
     { rule = { class = "Gimp" },
       properties = { tag = "etc", switchtotag = true, maximized_vertical = true, maximized_horizontal = true }
     },
+    { rule = { class = "Conky" },
+      properties = { border_width = 0, opacity = 0.5, sticky = true }
+    },
     { rule = { name = "DFB X11 system window" },
       properties = { screen = 1 }
     },
