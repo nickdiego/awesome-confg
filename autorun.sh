@@ -8,7 +8,7 @@ function run() {
 }
 
 # Start apps
-run compton --config ~/.compton.conf
+run compton
 run nm-applet
 run udiskie --use-udisks2
 run google-chrome-stable --no-startup-window
