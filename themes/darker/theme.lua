@@ -18,7 +18,7 @@ theme.font          = "xos4 Terminus 9"
 
 theme.bg_normal     = "#000000"
 theme.bg_focus      = "#1E2320"
-theme.bg_urgent     = "#ff0000"
+theme.bg_urgent     = "#ff000088"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 theme.systray_icon_spacing = 1
