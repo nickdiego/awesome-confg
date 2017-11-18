@@ -17,8 +17,8 @@ require("awful.autofocus")
 local cyclefocus = require("utils/cyclefocus")
 cyclefocus.display_notifications = false
 
-local collision = require("collision")()
-collision.settings.swap_across_screen = true
+--local collision = require("collision")()
+--collision.settings.swap_across_screen = true
 
 
 -- {{{ Error handling
