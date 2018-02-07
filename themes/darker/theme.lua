@@ -328,9 +328,9 @@ function theme.at_screen_connect(s)
             app = quake_cmd,
             argname = "--name %s",
             followtag = true,
-            width = 0.7,
+            width = 1.0,
             height = 0.5,
-            overlap = false,
+            overlap = true,
             horiz = "center",
             vert = "top",
             settings = function(c) c.border_width = 0 end
