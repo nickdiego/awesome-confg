@@ -432,6 +432,17 @@ awful.rules.rules = {
         placement = awful.placement.centered }
     },
 
+    { rule_any = { class = { "Plank", "lattedock" } },
+        properties = {
+            border_width = 0,
+            floating = true,
+            sticky = true,
+            ontop = true,
+            --focusable = false,
+            --below = true
+        }
+    },
+
     -- Set Brower/Mail Client to always map on tags number 2 of screen 1.
     { rule_any = { class = { "Firefox" }, instance = { "chromium", "google-chrome" } },
       properties = { screen = screen.count() < 3 and 1 or 3, tag = "web", switchtotag = true }
