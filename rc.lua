@@ -1,4 +1,5 @@
 -- Standard awesome library
+-- vim: ts=4 sw=4 et
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
 
@@ -17,8 +18,8 @@ require("awful.autofocus")
 local cyclefocus = require("utils/cyclefocus")
 cyclefocus.display_notifications = false
 
---local collision = require("collision")()
---collision.settings.swap_across_screen = true
+local collision = require("collision")()
+collision.settings.swap_across_screen = true
 
 
 -- {{{ Error handling
@@ -213,6 +214,18 @@ globalkeys = awful.util.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
+    -- rename tag
+    awful.key({ modkey }, ",",
+            function ()
+                awful.prompt.run {
+                    prompt = " | Rename tab: ",
+                    textbox = awful.screen.focused().mypromptbox.widget,
+                    exe_callback = function (s)
+                        awful.tag.selected().name = s
+                    end
+                }
+            end,
+            {description = "Rename current tag", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end),
     -- Toggle wibox
