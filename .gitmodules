@@ -6,4 +6,4 @@
 	url = git://github.com/copycat-killer/lain.git
 [submodule "collision"]
 	path = collision
-	url = https://github.com/Elv13/collision.git
+	url = git@github.com:nickdiego/collision.git
