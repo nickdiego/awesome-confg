@@ -330,12 +330,12 @@ function theme.at_screen_connect(s)
             app = quake_cmd,
             argname = "--name %s",
             followtag = true,
-            width = 1.0,
+            width = 0.85,
             height = 0.5,
             overlap = true,
             horiz = "center",
             vert = "top",
-            settings = function(c) c.border_width = 0 end
+            settings = function(c) c.y = -1 end
         })
 
     local quake_htop_cmd = string.format("termite --config=%s -e htop",
@@ -346,12 +346,11 @@ function theme.at_screen_connect(s)
             name = "quake_htop",
             argname = "--name %s",
             followtag = true,
-            width = 0.7,
+            width = 0.85,
             height = 0.5,
             overlap = true,
             horiz = "center",
-            vert = "bottom",
-            settings = function(c) c.border_width = 0 end
+            vert = "bottom"
         })
 
     local quake_ranger_cmd = string.format("termite --config=%s -e ranger",
@@ -362,12 +361,11 @@ function theme.at_screen_connect(s)
             name = "quake_nemo",
             argname = "--name %s",
             followtag = true,
-            width = 0.5,
+            width = 0.7,
             height = 0.5,
             overlap = true,
             horiz = "center",
-            vert = "bottom",
-            settings = function(c) c.border_width = 0 end
+            vert = "bottom"
         })
 
     -- Each screen has its own tag table.
