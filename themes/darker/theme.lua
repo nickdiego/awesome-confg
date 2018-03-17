@@ -160,9 +160,11 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
+theme.dark_red = "#550000"
+
 theme.collision_focus_fg = theme.fg_normal
 theme.collision_focus_bg = theme.bg_normal
-theme.collision_focus_bg_center = theme.bg_normal
+theme.collision_focus_bg_center = theme.dark_red
 theme.collision_shape_width = 30
 theme.collision_shape_height = 30
 theme.collision_focus_padding = 4
