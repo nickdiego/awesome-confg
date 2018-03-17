@@ -22,7 +22,7 @@ theme.bg_urgent     = "#ff000088"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 theme.systray_icon_spacing = 1
-theme.wibar_height  = 18
+theme.wibar_height  = 20
 
 theme.fg_normal     = "#bbbbbb"
 theme.fg_focus      = "#ffffff"
