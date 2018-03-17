@@ -408,7 +408,8 @@ awful.rules.rules = {
             "pinentry",
             "veromix",
             "xtightvncviewer",
-            "Nemo"
+            "Nemo",
+            "scrcpy"
             },
           name = {
             "Event Tester",  -- xev.
