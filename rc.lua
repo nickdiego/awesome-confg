@@ -21,8 +21,8 @@ local collision     = require("collision")()
 require("awful.autofocus")
 
 -- Custom modules configs
-cyclefocus.display_notifications = false
-collision.settings.swap_across_screen = true
+if cyclefocus then cyclefocus.display_notifications = false end
+if collision  then collision.settings.swap_across_screen = true end
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
