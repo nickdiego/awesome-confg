@@ -7,7 +7,7 @@
 local gears  = require("gears")
 local lain   = require("lain")
 local awful  = require("awful")
-local wibox  = require("/wibox")
+local wibox  = require("wibox")
 local helpers = require("lain.helpers")
 
 local theme = {}
