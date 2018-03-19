@@ -170,6 +170,8 @@ theme.collision_shape_height = 30
 theme.collision_focus_padding = 4
 theme.collision_focus_border_width = 4
 
+theme.collision_resize_disabled = true
+
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = "breeze-dark"
