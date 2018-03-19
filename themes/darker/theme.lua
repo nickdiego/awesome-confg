@@ -31,7 +31,7 @@ theme.fg_minimize   = "#ffffff"
 
 theme.border_width  = 1
 theme.border_normal = "#000000"
-theme.border_focus  = "#2f2f2f"
+theme.border_focus  = "#3e3e3e"
 theme.border_marked = "#91231c"
 
 theme.tasklist_align = "center"
