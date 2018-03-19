@@ -410,7 +410,7 @@ awful.rules.rules = {
 
     -- Set Brower/Mail Client to always map on tags number 2 of screen 1.
     { rule_any = { class = { "Firefox" }, instance = { "chromium", "google-chrome" } },
-      properties = { screen = screen.count() < 3 and 1 or 3, tag = "web", switchtotag = true }
+      properties = { 1, tag = "web", switchtotag = true }
     },
     { rule_any = { class = { "Evolution" } },
       properties = { screen = 1, maximized_vertical = true, maximized_horizontal = true }
