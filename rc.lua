@@ -1,4 +1,5 @@
--- Standard awesome library
+-- My AwesomeWM configs
+-- Nick Yamane <nick@diegoyam.com>
 -- vim: ts=4 sw=4 et
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
@@ -12,15 +13,16 @@ local lain          = require("lain")      -- Awesome complements
 local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
+-- Custom util modules
+local cyclefocus    = require("utils/cyclefocus")
+local collision     = require("collision")()
+
+-- Enable autofocus
 require("awful.autofocus")
 
--- Custom util modules
-local cyclefocus = require("utils/cyclefocus")
+-- Custom modules configs
 cyclefocus.display_notifications = false
-
-local collision = require("collision")()
 collision.settings.swap_across_screen = true
-
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -49,64 +51,35 @@ end
 
 -- {{{ Variable definitions
 -- This is used later as the default terminal and editor to run.
-local chosen_theme = "darker"
-local modkey       = "Mod4"
-local altkey       = "Mod1"
-local terminal = "termite"
-local editor = os.getenv("EDITOR") or "vim"
-local editor_cmd = terminal .. " -e " .. editor
-local webbrowser = "firefox"
-local lockscreen = "/usr/lib/kscreenlocker_greet"
-local filemanager = "ranger"
-local filemanager_cmd = terminal .." -e " .. filemanager
-local filemanager_gui = "nemo"
-local toggledisplay = "~/.bin/toggle-aux-display"
+local chosen_theme      = "darker"
+local modkey            = "Mod4"
+local altkey            = "Mod1"
+local terminal          = "termite"
+local editor            = os.getenv("EDITOR") or "vim"
+local editor_cmd        = terminal .. " -e " .. editor
+local webbrowser        = os.getenv("EDITOR") or "firefox"
+local lockscreen        = "/usr/lib/kscreenlocker_greet"
+local filemanager       = "ranger"
+local filemanager_cmd   = terminal .." -e " .. filemanager
+local filemanager_gui   = "nemo"
+local toggledisplay     = "~/.bin/toggle-aux-display"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.util.terminal = terminal
 awful.util.tagnames = { "code", "term", "web", "chat", "etc" }
 awful.layout.layouts =
 {
-    awful.layout.suit.tile,
     awful.layout.suit.fair,
+    awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.floating,
     awful.layout.suit.max,
-    --[[ unused for now
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
-    ]]--
 }
 -- }}}
 
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
+local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua",
+                                 os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
--- }}}
-
--- {{{ Menu
--- Create a laucher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -131,7 +104,6 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -153,19 +125,12 @@ globalkeys = awful.util.table.join(
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    --awful.key({ modkey,           }, "Right", function () awful.screen.focus_relative(1) end),
-    --awful.key({ modkey,           }, "Left", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "h", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey,           }, "l", function () awful.screen.focus_relative(-1) end),
 
     -- Non-empty tag browsing
     awful.key({ modkey,           }, "j", function () lain.util.tag_view_nonempty(-1) end),
     awful.key({ modkey,           }, "k", function () lain.util.tag_view_nonempty(1) end),
-    --awful.key({ modkey,           }, "Up", function () lain.util.tag_view_nonempty(-1) end),
-    --awful.key({ modkey,           }, "Down", function () lain.util.tag_view_nonempty(1) end),
-    -- Tag browsing
-    --awful.key({ modkey,           }, "Up",   awful.tag.viewprev       ),
-    --awful.key({ modkey,           }, "Down",  awful.tag.viewnext       ),
 
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -226,8 +191,10 @@ globalkeys = awful.util.table.join(
                 }
             end,
             {description = "Rename current tag", group = "awesome"}),
+
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end),
+
     -- Toggle wibox
     awful.key({ modkey }, "b",
         function ()
@@ -253,24 +220,18 @@ globalkeys = awful.util.table.join(
             os.execute(string.format("amixer -q set %s toggle", beautiful.volume.channel))
             beautiful.volume.update()
         end),
+    awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause", false) end),
+    awful.key({}, "XF86AudioNext", function() awful.util.spawn("playerctl next", false) end),
+    awful.key({}, "XF86AudioPrev", function() awful.util.spawn("playerctl previous", false) end),
 
-    awful.key({}, "XF86AudioPlay", function()
-      awful.util.spawn("playerctl play-pause", false) end),
-    awful.key({}, "XF86AudioNext", function()
-      awful.util.spawn("playerctl next", false) end),
-    awful.key({}, "XF86AudioPrev", function()
-      awful.util.spawn("playerctl previous", false) end),
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessDown", function ()
-        awful.util.spawn("xbacklight -dec 8") end),
-    awful.key({ }, "XF86MonBrightnessUp", function ()
-        awful.util.spawn("xbacklight -inc 8") end)
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 8") end),
+    awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 8") end)
 )
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
-    --awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "space",  lain.util.magnify_client                         ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
@@ -332,16 +293,6 @@ for i = 1, 5 do
                               awful.client.movetotag(tag)
                           end
                      end
-                  end),
-        -- Toggle tag.
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = awful.tag.gettags(client.focus.screen)[i]
-                          if tag then
-                              awful.client.toggletag(tag)
-                          end
-                      end
                   end))
 end
 
