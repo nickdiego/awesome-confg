@@ -226,7 +226,11 @@ globalkeys = awful.util.table.join(
 
     -- Brightness
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 8") end),
-    awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 8") end)
+    awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 8") end),
+
+    -- Gaps resizing
+    awful.key({ modkey,         }, "g", function () lain.util.useless_gaps_resize(1) end),
+    awful.key({ modkey, "Shift" }, "g", function () lain.util.useless_gaps_resize(-1) end)
 )
 
 clientkeys = awful.util.table.join(
