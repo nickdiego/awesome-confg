@@ -8,7 +8,8 @@ function run() {
 }
 
 # Start apps
-run compton
 run nm-applet
+run compton
+run plank
 run udiskie --use-udisks2
 run dropbox
