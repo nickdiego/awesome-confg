@@ -100,7 +100,7 @@ theme.notification_max_width  = 600
 theme.notification_icon_size  = 100
 theme.notification_margin     = 10
 theme.notification_shape      = function(cr, width, height)
-                                    gears.shape.rounded_rect(cr, width, height, 10)
+                                    gears.shape.rounded_rect(cr, width, height, 5)
                                 end
 
 
