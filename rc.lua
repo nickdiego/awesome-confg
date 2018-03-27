@@ -406,9 +406,8 @@ awful.rules.rules = {
             border_width = 0,
             floating = true,
             sticky = true,
-            ontop = true,
-            --focusable = false,
-            --below = true
+            focusable = false,
+            below = true,
         }
     },
 
