@@ -95,6 +95,15 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
+theme.notification_max_height = 400
+theme.notification_max_width  = 600
+theme.notification_icon_size  = 100
+theme.notification_margin     = 10
+theme.notification_shape      = function(cr, width, height)
+                                    gears.shape.rounded_rect(cr, width, height, 10)
+                                end
+
+
 theme.dark_red = "#550000"
 
 theme.collision_focus_fg = theme.fg_normal
