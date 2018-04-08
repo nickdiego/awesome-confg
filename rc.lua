@@ -439,6 +439,9 @@ awful.rules.rules = {
     { rule = { name = "Drunkwaiter" },
       properties = { screen = (screen.count() < 3 and 1 or 3) }
     },
+    { rule = { class = "pylondemo" },
+      properties = { screen = 1 }
+    }
 }
 -- }}}
 
