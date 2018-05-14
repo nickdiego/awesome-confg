@@ -69,8 +69,8 @@ awful.util.terminal = terminal
 awful.util.tagnames = { "code", "term", "web", "chat", "etc" }
 awful.layout.layouts =
 {
-    awful.layout.suit.fair,
     awful.layout.suit.tile,
+    awful.layout.suit.fair,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.floating,
     awful.layout.suit.max,
